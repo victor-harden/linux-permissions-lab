@@ -1,13 +1,29 @@
-# Local state
-*.log
-*.tmp
-.cache/
+# Byte-compiled / cache
+__pycache__/
+*.py[cod]
+*.pyo
+*.egg-info/
+.eggs/
+build/
+dist/
+.venv/
+venv/
+env/
 
-# Secrets
+# Test / coverage
+.pytest_cache/
+.coverage
+htmlcov/
+.mypy_cache/
+.ruff_cache/
+
+# Environments
 .env
 .env.*
+!.env.example
 
 # Editors / OS
 .vscode/
 .idea/
 .DS_Store
+Thumbs.db
