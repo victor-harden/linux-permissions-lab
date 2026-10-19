@@ -1,0 +1,13 @@
+# Local state
+*.log
+*.tmp
+.cache/
+
+# Secrets
+.env
+.env.*
+
+# Editors / OS
+.vscode/
+.idea/
+.DS_Store

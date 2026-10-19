@@ -1,0 +1,28 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  lint-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Syntax check
+        run: |
+          for f in $(find . -name '*.sh' -not -path './.git/*'); do
+            bash -n "$f"
+          done
+      - name: ShellCheck
+        run: |
+          if command -v shellcheck >/dev/null 2>&1; then
+            find . -name '*.sh' -not -path './.git/*' -exec shellcheck -S warning {} +
+          else
+            sudo apt-get update -qq && sudo apt-get install -y shellcheck
+            find . -name '*.sh' -not -path './.git/*' -exec shellcheck -S warning {} +
+          fi
+      - name: Run tests
+        run: |
+          if [ -f tests/run_tests.sh ]; then bash tests/run_tests.sh; fi
